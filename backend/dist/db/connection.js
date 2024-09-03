@@ -1,23 +1,22 @@
 import { connect, disconnect } from "mongoose";
-
 export default async function connectToDatabase() {
     try {
         await connect(process.env.MONGODB_URL);
-        console.log("MongoDB Connection successful!")
-    } catch (error) {
+        console.log("MongoDB Connection successful!");
+    }
+    catch (error) {
         console.log(error);
         throw new Error(`MongoDB connection failed due to error.\n${error}`);
     }
 }
-
 async function disconnectFromDatabase() {
     try {
         await disconnect();
-    } catch (error) {
+    }
+    catch (error) {
         console.log(error);
         throw new Error(`Error while attempting to disconnect from MongoDB.\n${error}`);
     }
 }
-
-
 export { connectToDatabase, disconnectFromDatabase };
+//# sourceMappingURL=connection.js.map

@@ -1,18 +1,10 @@
-import express from 'express';
-const app = express();
-// Add middleware to use json in our express application
-app.use(express.json());
-// Basic GET Route
-app.get("/", (req, res, next) => {
-    return res.send("Welcome to initial phase of ChatBot Application powered by GeminiAI");
-});
-// Greet POST Route
-app.post("/greet", (req, res, next) => {
-    return res.json({ "message": `Hey ${req.body.name}! How you doing?` });
-});
-// Dynamic Routing
-app.post("/user/:id", (req, res, next) => {
-    return res.json({ "message": `User ${req.params.id}. How may I help you?` });
-});
-app.listen(5000, () => console.log("Server is listening on port 5000"));
+import app from './app.js';
+import connectToDatabase from './db/connection.js';
+const PORT = process.env.PORT || 5000;
+// Connection and listener that starts and listens to the requests incoming our express application
+connectToDatabase()
+    .then(() => {
+    app.listen(PORT, () => console.log("Server is listening on port 5000"));
+})
+    .catch((err) => console.log(err));
 //# sourceMappingURL=index.js.map
